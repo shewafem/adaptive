@@ -1,0 +1,364 @@
+@use "sass:math";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300;400;500;600;700;800;900&display=swap');
+@import "null.scss";
+//------------------------------------------------------
+
+$color1: #F4F1DE;
+$color2: #81B29A;
+$text-color: #3D405B;
+$color3: #E07A5F;
+$color4: #F2CC8F;
+
+//------------------------------------------------------
+html {
+    color: $text-color;
+    font-family: "Montserrat Alternates";
+    font-weight: 500;
+}
+
+@function prc($pxOne, $pxTwo) {
+    $result: math.div($pxOne, $pxTwo) * 100%;
+    @return $result;
+}
+
+@function rem($px) {
+    $result: math.div($px, 16) + rem;
+    @return $result;
+}
+
+@function em($px) {
+    $result: math.div($px, 16) + em;
+    @return $result;
+}
+
+%items-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+%wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+@mixin bx-shdw($clr, $rng) {
+    box-shadow: 3px 4px $rng $clr;
+}
+
+#logo {
+    width: 100px;
+}
+
+.del {
+    background-color: crimson;
+    color: $color1;
+    margin: 0 30px;
+
+    @media (max-width: 492px) {
+        font-size: 12px;
+    }
+}
+
+
+@keyframes scale {
+    0% {
+        transform: scale(100%);
+    }
+
+    50% {
+        transform: scale(150%);
+    }
+
+    100% {
+        transform: scale(100%);
+    }
+}
+
+.btn {
+    width: auto;
+    border-radius: 20px;
+    padding: 5px 15px;
+    margin: 10px 0;
+
+    &:hover {
+        transition: 0.5s ease;
+        transition-property: box-shadow;
+        @include bx-shdw($color2, 2px);
+    }
+
+}
+
+.menu {
+    &__list {
+        @extend %wrap;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin: 0 21px 0 0;
+        }
+    }
+
+    &__link {
+        color: inherit;
+        line-height: prc(24, 16);
+        font-weight: 700;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.wrapper {
+    min-height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    main {
+        flex: 1 1 auto;
+    }
+}
+
+._container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: content-box;
+}
+
+//------------------------------------------------------
+.header {
+    width: 100%;
+    background-color: $color1;
+
+    &__container {
+        display: flex;
+        min-height: 104px;
+        align-items: center;
+        justify-content: space-between;
+
+        @media (max-width: 479px) {
+            min-height: 80px;
+        }
+    }
+
+    &__logo {
+        svg {
+            width: 100px;
+            height: 100px;
+            padding: 5px 0;
+        }
+    }
+
+    &__menu {
+        padding: 5px 0;
+
+        @media (max-width: 992px) {
+            margin: 0 50px 0 0;
+        }
+
+        @media (max-width: 767px) {
+            margin: 0 70px 0 50px;
+        }
+
+        @media (max-width: 549px) {
+            margin: 0 0px 0 50px;
+        }
+    }
+}
+
+//------------------------------------------------------
+
+.page {
+    &__books {
+        margin: 20px 0;
+    }
+}
+
+.books {
+    &__body {
+        @extend %wrap;
+        margin: 0px -15px;
+    }
+
+    &__column {
+        padding: 0px 15px;
+        flex: 0 1 33.333%;
+        margin: 0 0 30px 0;
+
+        @media (max-width: 992px) {
+            flex: 0 1 50%;
+
+            &:last-child {
+                flex: 1 1 100%;
+            }
+        }
+
+        @media (max-width: 520px) {
+            flex: 0 1 auto;
+        }
+    }
+
+    &__item {
+        height: 100%;
+        background-color: $color3;
+        padding: 35px;
+        @include bx-shdw($color4, 19px);
+
+        @media (max-width: 768px) {
+            padding: 25px;
+        }
+
+        @media (max-width: 479px) {
+            padding: 20px;
+        }
+    }
+}
+
+.item-book {
+    &>*:not(:last-child) {
+        margin: 0 0 10px 0;
+    }
+
+    &__image {}
+
+    // .item-book__title
+
+    &__title {
+        font-weight: 700;
+        font-size: prc(24, 16);
+        line-height: prc(32, 24);
+        color: $color1;
+        font-weight: 600;
+    }
+
+    // .item-book__text
+
+    &__text {
+        color: $color1;
+        line-height: prc(20, 14);
+
+    }
+}
+
+//------------------------------------------------------
+.page__list {
+    .list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px auto;
+        max-width: 700px;
+        border-radius: 30px;
+        padding: 10px 10px;
+
+        &__item {
+            padding: 5px;
+            min-width: 300px;
+            width: 100%;
+            border-radius: 30px;
+
+            &:not(last-child) {
+                margin-bottom: 20px;
+            }
+
+            label {
+                input {
+                    margin: 0 20px;
+                }
+
+                @extend %items-center;
+                padding: 10px;
+
+                @media (max-width: 492px) {
+                    padding: 5px;
+                }
+            }
+
+            @media (max-width: 492px) {
+                svg {
+                    display: none;
+                }
+            }
+
+        }
+
+        &__name {
+            padding: 5px;
+            line-height: prc(24, 16);
+            text-align: center;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        &__number {
+            text-align: center;
+            padding-right: 10px;
+            margin: 0 15px;
+            color: $color2;
+
+            @media (max-width: 492px) {
+                margin: 0 5px;
+            }
+        }
+    }
+
+    &-title {
+        text-align: center;
+        margin-bottom: 10px;
+        font-weight: 700;
+        font-size: 2rem;
+
+    }
+
+    .form {
+        max-width: 700px;
+        min-width: 250px;
+        margin: 0 auto;
+        padding: 10px;
+        border-radius: 20px;
+        background: $color4;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        &__title {
+            line-height: 150%;
+            font-weight: 600;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .btn {
+            animation: scale 5s infinite;
+            &:hover {
+                animation: none;
+            }
+        }
+    }
+}
+
+//------------------------------------------------------
+.footer {
+    width: 100%;
+    text-align: center;
+    height: 100px;
+    @extend %items-center;
+    background: $color2;
+
+    @media (max-width: 767px) {
+        height: 70px;
+    }
+
+    &__text {
+        font-weight: 700;
+        line-height: prc(24, 16);
+        padding: 5px 10px;
+
+        @media (max-width: 480px) {}
+    }
+}
